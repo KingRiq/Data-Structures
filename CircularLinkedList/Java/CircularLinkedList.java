@@ -29,23 +29,19 @@ public class CircularLinkedList {
 
     // Java LL has methods why shouldn't ours
     public void add(int data){
-        
+        Node newNode = new Node(data, null);
         // if there are no nodes head is now the node
         if (nodeCount == 0) {
-            head = new Node(data, null); //head points to itself NOTICE: last still = head
-            head.next = head;
-            last = head;
+            head = newNode; //head points to itself NOTICE: last still = head
             nodeCount++;
         }
         else {
             //add it in front
-            Node newNode = new Node(data, null);
-            newNode.next = head;
-            head = newNode; //head is the newest node NOTICE: last = next node 
-            last.next = head; //circular
+            last.next = newNode; //circular
             nodeCount++;
         }
-
+        last = newNode;
+        last.nextNode = head;
     }
 
     // remove a specific key (data) (only one)
