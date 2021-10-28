@@ -1,5 +1,5 @@
-// Queue
-public class Queue {
+// Stack Implementation
+public class Stack {
 
     
     Node head;  
@@ -19,8 +19,8 @@ public class Queue {
         } // Node constructor
     }
 
-    // Init Queue of size n
-    public Queue(int size) {
+    // Init Stack of size n
+    public Stack(int size) {
         head = null;  // empty list is null
         nodeCount = 0; //good debugging tool
         this.size = size;
@@ -43,8 +43,8 @@ public class Queue {
         }
         return empty;
     }
-    // Queue is FIFO
-    public void enter(int data){
+    // Stack is LIFO
+    public void push(int data){
         if(!isFull()) {
             Node newNode = new Node(data, null);
             // if there are no nodes head is now the node
@@ -60,13 +60,13 @@ public class Queue {
             }
         }
         else {
-            System.out.println("Could not enter node because the queue is too full");
+            System.out.println("Could not enter node because the stack is too full");
         }
 
     }
 
     // remove a specific key (data) (only one)
-    public void leave(){
+    public void pop(){
         Node curr = head;
 
         //just make sure there is at least one node

@@ -91,9 +91,7 @@ public class Queue {
                 nodeCount--;
                 break;
             }
-            curr = curr.next;
-
-    
+            curr = curr.next;    
         }
         printList();
     }

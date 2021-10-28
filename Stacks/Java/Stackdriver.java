@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 //Driver for LL
-public class Qdriver {
+public class Stackdriver {
 public static void main(String[] args ) {
     Scanner sc = new Scanner(System.in);
     
@@ -12,18 +12,18 @@ public static void main(String[] args ) {
     
     String input = sc.next();
     int number = Integer.parseInt(input);
-    Queue queue = new Queue(number);
+    Stack stack = new Stack(number);
     
     for(int i = 0; i<number+2; i++) {
-        queue.enter(i);
+        stack.push(i);
     }
 
-    queue.peek();
-    System.out.println("Queue full =  "+ queue.isFull());
-    System.out.println("Queue empty = "+ queue.isEmpty());
-    queue.printList();
+    stack.peek();
+    System.out.println("Stack full =  "+ stack.isFull());
+    System.out.println("Stack empty = "+ stack.isEmpty());
+    stack.printList();
     boolean quit = false;
-    while(!quit && !queue.isEmpty()) {
+    while(!quit && !stack.isEmpty()) {
         
         System.out.println("Emptying List press q to quit");
         input = sc.nextLine();
@@ -31,15 +31,15 @@ public static void main(String[] args ) {
             quit = true;
         }
         else {
-            queue.leave();
+            stack.pop();
         }
 
     }
 
     //log
-    queue.peek();
-    System.out.println("Queue full =  "+ queue.isFull());
-    System.out.println("Queue empty = "+ queue.isEmpty());
+    stack.peek();
+    System.out.println("Stack full =  "+ stack.isFull());
+    System.out.println("Stack empty = "+ stack.isEmpty());
     sc.close();
     System.out.println("Process Complete");
 }
