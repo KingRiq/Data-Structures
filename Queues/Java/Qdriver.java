@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+
+
 //Driver for LL
 public class Qdriver {
 public static void main(String[] args ) {
@@ -11,13 +13,15 @@ public static void main(String[] args ) {
     String input = sc.next();
     int number = Integer.parseInt(input);
     Queue queue = new Queue(number);
+    
     for(int i = 0; i<number+2; i++) {
         queue.enter(i);
     }
 
-    
+    queue.peek();
+    System.out.println("Queue full =  "+ queue.isFull());
+    System.out.println("Queue empty = "+ queue.isEmpty());
     queue.printList();
-    
     boolean quit = false;
     while(!quit && !queue.isEmpty()) {
         
@@ -26,12 +30,16 @@ public static void main(String[] args ) {
         if(input.equals("q")) {
             quit = true;
         }
-        else{
+        else {
             queue.leave();
         }
 
     }
 
+    //log
+    queue.peek();
+    System.out.println("Queue full =  "+ queue.isFull());
+    System.out.println("Queue empty = "+ queue.isEmpty());
     sc.close();
     System.out.println("Process Complete");
 }

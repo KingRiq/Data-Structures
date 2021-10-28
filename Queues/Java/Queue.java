@@ -39,6 +39,7 @@ public class Queue {
         boolean empty = false;
         if(nodeCount == 0) {
             empty = true;
+            printList();
         }
         return empty;
     }
@@ -78,15 +79,17 @@ public class Queue {
         printList();
     }
 
-    // return the node at the top. NOTE: I dont like this method because the user can mess up the head node
+    // return the node at the top. 
     public Node peek() { 
 
-        if(head != null) {
+        if(head != null && !isEmpty()) {
             System.out.println("Next node our is node #" + head.data);
-            printList();
-            return head;
+            
+    
         }
-
+        else {
+            printList();
+        }
         return head;
     }
 
