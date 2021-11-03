@@ -40,7 +40,6 @@ public class Stack {
         boolean empty = false;
         if(nodeCount == 0) {
             empty = true;
-            printList();
         }
         return empty;
     }
@@ -72,12 +71,11 @@ public class Stack {
 
         //just make sure there is at least one node
         if(curr != null) {
-            System.out.println("Removing node #" + curr.data);
+            //System.out.println("Removing node #" + curr.data);
             head = curr.next;
             nodeCount--;
             
         }
-        printList();
         return curr;
         
     }
@@ -85,19 +83,14 @@ public class Stack {
     // return the node at the top. 
     public Node peek() { 
 
-        if(head != null && !isEmpty()) {
+        if(head != null && !isEmpty())
             System.out.println("Next node our is node #" + head.data);
-            
-    
-        }
-        else {
-            printList();
-        }
+ 
         return head;
     }
 
     public void printList() {
-        Node curr =head;
+        Node curr = head;
         System.out.println("List contains: " + nodeCount+ " nodes");
         System.out.print("[");
         while(curr != null) {

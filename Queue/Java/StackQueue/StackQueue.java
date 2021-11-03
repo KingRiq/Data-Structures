@@ -23,6 +23,7 @@ public class StackQueue {
     // Your Last node is now your first and the first is now the last
 
     public void enter(int data) {
+        queue_nodes();
         if(!isFull()) {
             enter.push(data);
             nodeCount++;
@@ -34,20 +35,11 @@ public class StackQueue {
 
         //for safety check that both arent empty?
         //ill do this later
-        if(!enter.isEmpty() && !leave.isFull()){
-
-        
-            //pop everything out of the first stack
-            while(!enter.isEmpty()) {
-                while(!leave.isFull() && !enter.isEmpty()) {
-                    leave.push(enter.pop().data);
-                }
-            }
-        }
-        if(!leave.isEmpty()) {
+        load_nodes();
+        if(!leave.isEmpty()) { // leave has to be empty before putting
             leave.pop();
             nodeCount--;
-        }
+        } 
 
         
     }
@@ -74,17 +66,31 @@ public class StackQueue {
 
     public Stack.Node peek() {
         Stack.Node peek = null;
-        while(!enter.isEmpty()) {
-            leave.push(enter.pop().data);
-        }
+        
+        queue_nodes();
         if (!leave.isEmpty()) {
             peek = leave.peek();
         }
+        
         return peek;
     }
 
     public void printList() {
-        this.peek();
+        queue_nodes();
+        load_nodes();
         leave.printList();
+    }
+
+    void queue_nodes() { //needed to make sure enter does not pop unless leave is empty
+            while(!leave.isEmpty() && !enter.isFull())
+                enter.push(leave.pop().data);
+
+    }       
+    
+
+    void load_nodes() {
+        while(!leave.isFull() && !enter.isEmpty()) {
+            leave.push(enter.pop().data);
+        }
     }
 }
