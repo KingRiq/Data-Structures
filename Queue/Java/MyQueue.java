@@ -112,7 +112,7 @@ public class MyQueue {
             System.out.print(curr.data);
             curr = curr.next;
             if(curr != null){
-                System.out.print(",");
+                System.out.print(", ");
             }
         }
         System.out.println("]");
