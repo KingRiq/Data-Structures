@@ -22,6 +22,5 @@ public class SQdriver {
         queue.printList();
         System.out.println("---");
 
-    
     }
 }

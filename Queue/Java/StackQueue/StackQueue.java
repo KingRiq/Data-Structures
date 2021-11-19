@@ -88,7 +88,7 @@ public class StackQueue {
     }       
     
 
-    void load_nodes() {
+    void load_nodes() { // make sure leave stack is loaded properly
         while(!leave.isFull() && !enter.isEmpty()) {
             leave.push(enter.pop().data);
         }

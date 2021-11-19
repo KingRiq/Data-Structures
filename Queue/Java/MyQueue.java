@@ -1,5 +1,5 @@
 // Queue
-public class Queue {
+public class MyQueue {
 
     
     Node head;
@@ -21,7 +21,7 @@ public class Queue {
     }
 
     // Init Queue of size n
-    public Queue(int size) {
+    public MyQueue(int size) {
         head = null;  // empty list is null
         last = null;
         nodeCount = 0; //good debugging tool
@@ -41,7 +41,6 @@ public class Queue {
         boolean empty = false;
         if(nodeCount == 0) {
             empty = true;
-            printList();
         }
         return empty;
     }
@@ -97,13 +96,11 @@ public class Queue {
     }
 
     // return the node at the top. 
-    public Node peek() { 
-
-        if(!isEmpty() && last != null) {
-
-            System.out.println("Next node our is node #" + last.data);
+    public int peek() { 
+        if(!isEmpty()) {
+            return last.data;
         }
-        return  last;
+        return  -1;
     }
 
     public void printList() {
@@ -120,6 +117,11 @@ public class Queue {
         }
         System.out.println("]");
     }
+
+    public int size() {
+
+        return nodeCount;
+    } 
 }
 
 
