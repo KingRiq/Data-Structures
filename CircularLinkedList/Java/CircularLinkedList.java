@@ -41,7 +41,7 @@ public class CircularLinkedList {
             nodeCount++;
         }
         last = newNode;
-        last.nextNode = head;
+        last.next = head;
     }
 
     // remove a specific key (data) (only one)
@@ -120,10 +120,14 @@ public class CircularLinkedList {
         System.out.println("]");
         
         
+        }
+        else {
+            System.out.println("Empty list");
+        }
     }
-    else {
-        System.out.println("Empty list");
-    }
+
+    public int size() {
+        return nodeCount;
     }
 }
 
