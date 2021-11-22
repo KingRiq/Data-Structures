@@ -107,19 +107,16 @@ public class CircularLinkedList {
 
                 System.out.print(curr.data);
                 curr = curr.next;
-                if(curr != head ){
-                System.out.print(",");
-            }
-            
-            // comment out else to see circular nature (there are no nodes with null)
-            else {
-                curr = null;
-            }
+                
+                if(curr != head ) 
+                    System.out.print(",");
 
-        }
-        System.out.println("]");
-        
-        
+                // comment out else to see circular nature (there are no nodes with null)
+                else 
+                    curr = null;
+                
+            }
+            System.out.println("]");
         }
         else {
             System.out.println("Empty list");
@@ -129,6 +126,40 @@ public class CircularLinkedList {
     public int size() {
         return nodeCount;
     }
+
+    // will print list infinitely because circular LL but loop will break after 100 iterations
+    public void printList1() {
+        Node curr = head;
+        int  i = 100;
+        if(nodeCount > 0) {
+            System.out.println("List contains: " + nodeCount+ " nodes");
+            System.out.print("[");
+            
+            while(curr != null && i > 0) {
+    
+                System.out.print(curr.data);
+                curr = curr.next;
+                
+                if(curr != head ) 
+                    System.out.print(",");
+    
+                // comment out else to see circular nature (there are no nodes with null)
+                /*else 
+                    curr = null;*/
+                
+                i--;
+            }
+            System.out.println("]");
+        }
+        else {
+            System.out.println("Empty list");
+        }
+    }
+
+    public void reset() {
+        head = null;
+        last = null;
+        nodeCount = 0; 
+        printList();
+    }
 }
-
-

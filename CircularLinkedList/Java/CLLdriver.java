@@ -8,6 +8,14 @@ public class CLLdriver {
         String input;
         int number;
         CircularLinkedList list = new CircularLinkedList();
+        System.out.println("First let's prove its circular");
+        list.add(700);
+        list.add(1);
+        list.printList1();
+        list.reset();
+
+        System.out.println("Ok, test done. Your turn!");
+        
         addNodes(list,sc);
 
         
@@ -17,10 +25,14 @@ public class CLLdriver {
         boolean quit = false;
         while(!quit && list.size() >0) {
         
-            System.out.println("Which nodes do you want to remove? press q to quit");
+            System.out.println("Which nodes do you want to remove? press q to quit or 'r' to reset");
             input = parseResponse(sc);
             if(input.equals("q")) {
                 quit = true;
+            }
+            else if(input.equals("r")) {
+                list.reset();
+                addMorePrompt(list, sc);
             }
             else {
                 number = Integer.parseInt(input);
