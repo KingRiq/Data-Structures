@@ -12,6 +12,11 @@ public class BTdriver {
         BT.insert(5);
         BT.insert(2);
         BT.insert(8);
+
+        while ((int) (Math.random()*1000) != 0) {
+            BT.insert((int) (Math.random()*1000));
+        }
+
        
         BT.print_Ordered();
     }

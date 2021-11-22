@@ -74,6 +74,7 @@ public class BinaryTree {
             }
             
         }
+        
         return curr;
     }
 
