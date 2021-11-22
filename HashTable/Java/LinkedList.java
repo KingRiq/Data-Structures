@@ -6,14 +6,14 @@ public class LinkedList {
     int nodeCount; //good debugging tool
 
     // Node Definition (You decide! You are the programmer)
-    protected class Node{                         
+    public class Node{                         
         //String name = "Node: "; dont know why
-        int data;
+        String key;
         Node next;
 
-        Node(int newData , Node nextNode)
+        Node(String key, Node nextNode)
         {
-            data = newData;     // insert data
+            this.key = key;
             next = nextNode;    // point to the next one
         } // Node constructor
     }
@@ -25,16 +25,16 @@ public class LinkedList {
     }
 
     // Java LL has methods why shouldn't ours
-    public void add(int data){
+    public void add(String key){
         
         // if there are no nodes head is now the node
         if (nodeCount == 0) {
-            head = new Node(data, null);
+            head = new Node(key, null);
             nodeCount++;
         }
         else {
             //add it in front
-            Node newNode = new Node(data, head);
+            Node newNode = new Node(key, head);
             head = newNode; //head is the newest node
             nodeCount++;
         }
@@ -42,7 +42,7 @@ public class LinkedList {
     }
 
     // remove a specific key (data) (only one)
-    public void remove(int key){
+    public void remove(String key){
         Node curr = head;
         Node prev = curr;
 
@@ -53,19 +53,19 @@ public class LinkedList {
          while(head != null && curr != null) { // while the list isnt empty and were not at the end
 
             //if the first element just increment head and java will collect the trash... nothing references it anymore
-            if(curr == head && curr.data == key) {
+            if(curr == head && curr.key == key) {
                  head = curr.next;
                  curr = head;
                  prev = curr;
                  nodeCount--;
                  break; //we found it we need to stop
             }
-            if(curr.next == null && curr.data == key) { //we hit the last one just get rid of it.
+            if(curr.next == null && curr.key == key) { //we hit the last one just get rid of it.
                 prev.next = null;
                 curr = prev;
                 nodeCount--;
             }//do we need this?
-            if(curr.data == key) { // normal operation
+            if(curr.key == key) { // normal operation
                 curr = curr.next;
                 prev.next = curr;
                 nodeCount--;
@@ -75,20 +75,33 @@ public class LinkedList {
 
          }
     }
+    public boolean search(String key) {
+        Node curr = head;
+        boolean found = false;
+        while(curr != null && !found) {
+            found = curr.key.equals(key);
+            curr = curr.next;
+        }
 
+        return found;
+    }
     public void printList() {
-        Node curr =head;
+        Node curr = head;
         System.out.println("List contains: " + nodeCount+ " nodes");
         System.out.print("[");
         while(curr != null) {
 
-            System.out.print(curr.data);
+            System.out.print(curr.key);
             curr = curr.next;
             if(curr != null){
                 System.out.print(",");
             }
         }
         System.out.println("]");
+    }
+    
+    public int size() {
+        return nodeCount;
     }
 }
 
