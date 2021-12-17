@@ -1,10 +1,11 @@
-import SortingAlgorithms.BubbleSort;
-import SortingAlgorithms.SelectionSort;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
-
+import SortingAlgorithms.BubbleSort;
+import SortingAlgorithms.InsertionSort;
+import SortingAlgorithms.SelectionSort;
+import SortingAlgorithms.MergeSort;
+import SortingAlgorithms.QuickSort;
 public class Array{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -21,29 +22,71 @@ public class Array{
         }
 
         // because lazy
-        System.out.println(Arrays.toString(int_array));
+        System.out.println(Arrays.toString(int_array)+"\n");
 
         // Lets show some sorting algos
         //Log
 
+        long startTime, endTime, duration;
         
+        int[] a = reset(int_array);
         
         // Bubble Sort
-        int[] a = reset(int_array);
         System.out.println("1) Bubble Sort\n");
-        printArr(a);
+        //printArr(a);
+        startTime = System.nanoTime();
         a = BubbleSort.bubbleSort(a);
-        printArr(a);
-        
+        endTime = System.nanoTime();
+        duration = endTime - startTime;//1000000
+        //printArr(a);
+        System.out.println("This Took " + duration + " nanoseconds\n");
+
+
         // Selection Sort
         a = reset(int_array);
         System.out.println("2) Selection Sort\n");
-        printArr(a);
-        a = SelectionSort.selectionSort(a);  
-        printArr(a);
-        
-        
+        //printArr(a);
+        startTime = System.nanoTime();
+        a = SelectionSort.selectionSort(a); 
+        endTime = System.nanoTime();
+        duration = endTime - startTime;//1000000 
+        //printArr(a);
+        System.out.println("This Took " + duration + " nanoseconds\n");
 
+        // Insertion Sort
+        a = reset(int_array);
+        System.out.println("3) Insertion Sort\n");
+        //printArr(a);
+        startTime = System.nanoTime();
+        a = InsertionSort.insertionSort(a); 
+        endTime = System.nanoTime();
+        duration = endTime - startTime;//1000000 
+        //printArr(a);
+        System.out.println("This Took " + duration + " nanoseconds\n");
+
+        // Merge Sort
+        a = reset(int_array);
+        System.out.println("4) Merge Sort\n");
+        //printArr(a);
+        startTime = System.nanoTime();
+        a = MergeSort.mergeSort(a);  
+        endTime = System.nanoTime();
+        duration = endTime - startTime;//1000000
+        //printArr(a);
+        System.out.println("This Took " + duration + " nanoseconds\n");
+
+        // Quick Sort
+        a = reset(int_array);
+        System.out.println("4) Quick Sort\n");
+        //printArr(a);
+        startTime = System.nanoTime();
+        a = QuickSort.quickSort(a); 
+        endTime = System.nanoTime();
+        duration = endTime - startTime;//1000000 
+        //printArr(a);
+        System.out.println("This Took " + duration + " nanoseconds");
+        
+        
     }
 
     // restore back to unsorted state

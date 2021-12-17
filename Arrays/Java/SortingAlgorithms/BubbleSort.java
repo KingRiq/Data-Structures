@@ -2,7 +2,6 @@ package SortingAlgorithms;
 
 public class BubbleSort {
 
-    public BubbleSort(){}
 
     // This algorithm after each iteration indice(n-i-1) will have the correct number there.
     public static int[] bubbleSort(int[] array) {
@@ -12,7 +11,7 @@ public class BubbleSort {
         // of size 2 only needs to be compared once
 
         //the inner loop does not need to consider the indices compared in previous iterations.
-        if(array.length == 0 || array.length == 1) {
+        if(array.length <= 1) {
             return array;
         }
         
@@ -34,14 +33,7 @@ public class BubbleSort {
                 }
             }
         }
-
-        /*
-        System.out.println("BubbleSort");
-        System.out.println("Average Time Complexity: ")
-        System.out.println("Time Complexity worst cast:");
-        System.out.println("Original Array: " + Arrays.toString(int_array));
-        System.out.println("BubbleSort");
-        System.out.println("BubbleSort");*/
+        
         return array;
     }
 
