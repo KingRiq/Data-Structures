@@ -3,7 +3,7 @@ package ArrayDS;
 import java.util.Arrays;
 
 // generic stack queue implementation any type can be used.
-public class QueueArray<E> {
+public class QueueArray<E> implements ArrayDSInterface{
 
     
     private Object array[];
@@ -17,10 +17,10 @@ public class QueueArray<E> {
     }
 
     
-    public void enqueue(E E) {
+    public void enqueue(E E) {        
         if(!isFull()) {
             array[size] = E;
-            if(!isFull()){this.size++;}
+            size++;
         }
         /*
         if(E.getClass() == String.class)
@@ -39,17 +39,20 @@ public class QueueArray<E> {
 
     public E dequeue() {
         E element = null;
+        
         if(!isEmpty()) {
-            element= (E)array[size];
-            array[size] = null;
+            element= (E)array[size-1];
+            array[size-1] = null;
             size--;
     
         }
+        
         return element;
     }
 
 
     public boolean isEmpty() {
+       
         return this.array[0] == null;
     }
 
@@ -60,5 +63,8 @@ public class QueueArray<E> {
 
     public String toString() {
         return Arrays.toString(array);
+    }
+    public int size() {
+        return size;
     }
 }

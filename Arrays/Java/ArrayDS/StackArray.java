@@ -3,7 +3,7 @@ package ArrayDS;
 import java.util.Arrays;
 
 // generic stack queue implementation any type can be used.
-public class StackArray<E> {
+public class StackArray<E> implements ArrayDSInterface{
 
     
     private Object array[];
@@ -20,7 +20,7 @@ public class StackArray<E> {
     public void push(E E) {
         if(!isFull()) {
             array[size] = E;
-            if(!isFull()){this.size++;}
+            size++;
         }
         /*
         if(E.getClass() == String.class)
@@ -60,8 +60,12 @@ public class StackArray<E> {
         for(int i = 0; i < array.length-1; i++) {
             array[i] = array[i+1];
             array[i+1] = null;
-            size--;
+            
         }
+        size--;
+    }
+    public int size() {
+        return size;
     }
 
     public String toString() {
