@@ -1,16 +1,13 @@
-package DFS;
-import BinaryTree.Node;
-
-public class PostOrder implements TreeTraversals {
+public class PostOrder {
     public static void print(BinaryTree tree) {
-        System.out.println("[");
-        print_PreOrder(tree.root);
+        System.out.print("[");
+        print_PostOrder(tree.root);
         System.out.println("]");
     }
 
 
     // Notes about post order (Left, Right, Root)
-    private void print_PostOrder(Node root){
+    private static void print_PostOrder(BinaryTree.Node root){
 
         // do nothing otherwise
         if(root != null) {

@@ -1,9 +1,9 @@
-import TreeTraversals.DFS.*;
+
 public class BinaryTree {
     int nodeCount;
-    Node root;
+    public Node root;
     
-    class Node {
+    public class Node {
         Node left, right;
         int data;
 

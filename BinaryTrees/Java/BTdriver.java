@@ -1,5 +1,3 @@
-
-
 public class BTdriver {
     public static void main(String[] args) {
         BinaryTree BT = new BinaryTree();
@@ -31,7 +29,7 @@ public class BTdriver {
         BT1.insert(20);
 
         BT1.printAll_Traversals();
-
+        
         BT1.delete(20);
         BT1.print_Ordered();
         BT1.delete(1);
@@ -46,5 +44,26 @@ public class BTdriver {
         BT1.print_Ordered();
         BT1.delete(500);
         BT1.print_Ordered();
+
+
+        //BT traversals
+        BT1.insert(15);
+        BT1.insert(2);
+        BT1.insert(5);
+        BT1.insert(20);
+
+        BT1.printAll_Traversals();
+       /* 15
+          /\
+         2  20
+          \
+           5  
+        
+        pre  [15,2,5,20]
+        inorder [5,2,20,15]
+        post [ 2,5,15,20 ]*/
+
+
+        
     }
 }

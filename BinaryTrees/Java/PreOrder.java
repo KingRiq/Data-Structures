@@ -1,17 +1,13 @@
-package DFS;
-
-import BinaryTree.Node;
-
 public class PreOrder {
     public static void print(BinaryTree tree) {
-        System.out.println("[");
+        System.out.print("[");
         print_PreOrder(tree.root);
         System.out.println("]");
     }
 
 
     // Notes about pre order (Root, Left, Right)
-    private void print_PreOrder(Node root) {
+    private static void print_PreOrder(BinaryTree.Node root) {
 
         // do nothing otherwise
         if(root != null) {
