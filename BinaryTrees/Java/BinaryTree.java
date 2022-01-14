@@ -1,3 +1,4 @@
+import TreeTraversals.DFS.*;
 public class BinaryTree {
     int nodeCount;
     Node root;
@@ -51,7 +52,7 @@ public class BinaryTree {
         
         if(data < curr.data) 
             curr.left = delete_Node(curr.left, data);
-        else if (data < curr.data) // I realize that this is a mistake but I want to see its implications
+        else if (data > curr.data)                      // else check right
             curr.right = delete_Node(curr.right, data);
         else {
             
@@ -78,6 +79,7 @@ public class BinaryTree {
         return curr;
     }
 
+    
     public void print_Ordered() {
         System.out.print("[");
         inOrder(root);
@@ -101,5 +103,31 @@ public class BinaryTree {
             curr = curr.left;
         }
         return min;
+    }
+
+    public void printAll_Traversals() {
+        System.out.println("Printing All possible traversals");
+
+        System.out.println("Starting PreOrder");
+        PreOrder.print(this);
+        System.out.println("PreOrder Complete");
+
+
+        System.out.println("Starting InOrder");
+        InOrder.print(this);
+        System.out.println("InOrder Complete");
+
+        System.out.println("Starting PostOrder");
+        PostOrder.print(this);
+        System.out.println("Post Order Complete");
+
+        /* copy this for other traversals
+
+        System.out.println("Starting PostOrder");
+        PostOrder.print(this);
+        System.out.println("Post Order Complete");
+
+        */
+
     }
 }

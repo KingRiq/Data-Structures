@@ -30,11 +30,21 @@ public class BTdriver {
         BT1.insert(5);
         BT1.insert(20);
 
-        BT1.print_Ordered();
+        BT1.printAll_Traversals();
 
         BT1.delete(20);
         BT1.print_Ordered();
-       
-        
+        BT1.delete(1);
+        BT1.print_Ordered();
+        BT1.delete(2);
+        BT1.print_Ordered();
+        BT1.delete(5);
+        BT1.print_Ordered();
+        BT1.delete(500); //check empty tree and number not in tree
+        BT1.print_Ordered();
+        BT1.insert(500);
+        BT1.print_Ordered();
+        BT1.delete(500);
+        BT1.print_Ordered();
     }
 }
