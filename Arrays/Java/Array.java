@@ -1,11 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-import SortingAlgorithms.BubbleSort;
-import SortingAlgorithms.InsertionSort;
-import SortingAlgorithms.SelectionSort;
-import SortingAlgorithms.MergeSort;
-import SortingAlgorithms.QuickSort;
+import SortingAlgorithms.*;
 public class Array{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

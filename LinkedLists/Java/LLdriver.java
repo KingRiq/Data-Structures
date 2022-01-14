@@ -29,7 +29,7 @@ public static void main(String[] args ) {
             list.remove(number);
         }
         list.printList();
-
+        list.list.printList();
     }
 
     sc.close();

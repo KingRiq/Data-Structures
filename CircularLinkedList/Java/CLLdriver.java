@@ -8,18 +8,17 @@ public class CLLdriver {
         String input;
         int number;
         CircularLinkedList list = new CircularLinkedList();
+        
+        // test
         System.out.println("First let's prove its circular");
         list.add(700);
         list.add(1);
         list.printList1();
         list.reset();
-
         System.out.println("Ok, test done. Your turn!");
         
+        // program actually begins here
         addNodes(list,sc);
-
-        
-
     
         list.printList();
         boolean quit = false;

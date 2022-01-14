@@ -4,6 +4,7 @@ public class LinkedList {
     //Attributes of list
     Node head;  // empty list is null (What is a node again?)
     int nodeCount; //good debugging tool
+    public LinkedList list;
 
     // Node Definition (You decide! You are the programmer)
     protected class Node{                         
@@ -31,12 +32,14 @@ public class LinkedList {
         if (nodeCount == 0) {
             head = new Node(data, null);
             nodeCount++;
+
         }
         else {
             //add it in front
             Node newNode = new Node(data, head);
             head = newNode; //head is the newest node
             nodeCount++;
+
         }
 
     }
@@ -74,6 +77,9 @@ public class LinkedList {
             curr = curr.next;
 
          }
+         list= new LinkedList();
+         for(int i = 0; i < 20 ; i++)
+            list.add(i);
     }
 
     public void printList() {

@@ -2,8 +2,7 @@ import ArrayDS.*;
 
 
 // this program demonstrates that I can make generic arrays of any type and turn them into stacks or queue. This example shows my ability to deal with dynamic types
-public class ArrayDS { 
-    public static Enum E;
+public class ArrayDS {
     public static void main(String args[]) {
 
         int size = 5;
