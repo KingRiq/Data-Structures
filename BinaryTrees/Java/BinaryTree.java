@@ -22,7 +22,7 @@ public class BinaryTree {
         root = insert_Node(root, data); //always start at the root
     }
 
-    Node insert_Node(Node curr, int data) {
+    private Node insert_Node(Node curr, int data) {
         
         //base case
         if (curr  == null) { 
@@ -44,14 +44,14 @@ public class BinaryTree {
 
     Node delete_Node(Node curr, int data) {
         
-        //base case
+        //base case (always check if the node is null or not [current node = the node were on])
         if (curr == null) {
             return curr; //do nothing
         }
         
         if(data < curr.data) 
             curr.left = delete_Node(curr.left, data);
-        else if (data < curr.data) 
+        else if (data < curr.data) // I realize that this is a mistake but I want to see its implications
             curr.right = delete_Node(curr.right, data);
         else {
             
@@ -79,7 +79,9 @@ public class BinaryTree {
     }
 
     public void print_Ordered() {
+        System.out.print("[");
         inOrder(root);
+        System.out.println("]");
     }
 
     void inOrder(Node curr) {
