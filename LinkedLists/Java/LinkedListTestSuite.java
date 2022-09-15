@@ -2,19 +2,39 @@
 public class LinkedListTestSuite {
     public static void main(String[] args) {
 
-        testAdd();
-        testReset();
-        testContains();
-        testRemoval();
-        testEmpty();
-        testGet();
+        testLinkedList();
+        testDoublyLinkedList();
         System.out.println("All Tests Passed");
     }
 
-    // test regular add
-    public static void testAdd() {
+    public static void testLinkedList() {
+        List list = new LinkedList();
+        testAdd(list);
+        testReset(list);
+        testContains(list);
+        testRemoval(list);
+        testEmpty(list);
+        testGet(list);
+        testSize(list);
+        System.out.println("LinkedList Tests have passed!");
+    }
 
-        LinkedList list = new LinkedList();
+    public static void testDoublyLinkedList() {
+        List list = new DoublyLinkedList();
+        testAdd(list);
+        testReset(list);
+        testContains(list);
+        testRemoval(list);
+        testEmpty(list);
+        testGet(list);
+        testSize(list);
+        System.out.println("Doubly LinkedList Tests have passed!");
+    }
+
+    // test regular add
+    public static void testAdd(List list) {
+
+        list.reset();
 
         for (int i = 1; i < 11; i++) {
             list.add(i);
@@ -92,8 +112,8 @@ public class LinkedListTestSuite {
         System.out.println("Add Test Successful");
     }
 
-    public static void testReset() {
-        LinkedList list = new LinkedList();
+    public static void testReset(List list) {
+        list.reset();
 
         for (int i = 0; i < 1000; i++) {
             list.add(i);
@@ -109,8 +129,8 @@ public class LinkedListTestSuite {
 
     }
 
-    public static void testContains() {
-        LinkedList list = new LinkedList();
+    public static void testContains(List list) {
+        list.reset();
 
         for (int i = 0; i < 1000; i++) {
             list.add(i);
@@ -125,8 +145,8 @@ public class LinkedListTestSuite {
         System.out.println("Contains Test successful");
     }
 
-    public static void testRemoval() {
-        LinkedList list = new LinkedList();
+    public static void testRemoval(List list) {
+        list.reset();
 
         // add random int
         list.add(100);
@@ -265,8 +285,8 @@ public class LinkedListTestSuite {
 
     }
 
-    public static void testEmpty() {
-        LinkedList list = new LinkedList();
+    public static void testEmpty(List list) {
+        list.reset();
 
         assert (list.isEmpty() == true);
         for (int i = 0; i < 1000000; i++) {
@@ -290,8 +310,8 @@ public class LinkedListTestSuite {
         System.out.println("Empty Test Complete");
     }
 
-    public static void testGet() {
-        LinkedList list = new LinkedList();
+    public static void testGet(List list) {
+        list.reset();
 
         // out of range
         assert (list.get(0) == -1);
@@ -307,6 +327,34 @@ public class LinkedListTestSuite {
         assert (list.get(-1) == -1);
 
         System.out.println("Get Test Complete");
+
+    }
+
+    public static void testSize(List list) {
+        list.reset();
+
+        for (int i = 0; i < 1000; i++) {
+            list.add(i);
+        }
+
+        assert (list.size() == 1000);
+
+        // print list using size explicitly.
+        for (int i = 0; i < list.size(); i++) {
+            assert (list.get(i) == list.size() - i - 1);
+        }
+
+        assert (list.size() == 1000);
+        list.reset();
+        assert (list.size() == 0);
+
+        for (int i = 0; i < list.size(); i++) {
+            assert (list.get(i) == list.size() - i - 1);
+        }
+
+        assert (list.size() == 0);
+
+        System.out.println("Size Test Complete");
 
     }
 }

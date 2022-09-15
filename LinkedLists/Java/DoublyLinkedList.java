@@ -1,61 +1,63 @@
-// LINKEDLIST OOP
-public class LinkedList implements List {
-
-    // Attributes of list
-    Node head; // empty list is null (What is a node again?)
+public class DoublyLinkedList implements List {
+    Node head;
     Node tail;
-    int nodeCount; // good debugging tool
+    int nodeCount;
 
-    // Node Definition (You decide! You are the programmer)
     protected class Node {
-        // String name = "Node: "; dont know why
         int data;
         Node next;
+        Node prev;
 
-        Node(int newData) {
-            data = newData;
-            // next is null by default
+        // lets define the head's prev pointer to be null!
+        Node(int data) {
+            this.data = data;
         }
 
-        Node(int newData, Node nextNode) {
-            data = newData; // insert data
-            next = nextNode; // point to the next one
-        } // Node constructor
+        // probably head insertion
+        Node(int data, Node next) {
+            this.data = data;
+            this.next = next;
+        }
+
+        // probably used to insert at index
+        Node(int data, Node prev, Node next) {
+            this.data = data;
+            this.prev = prev;
+            this.next = next;
+        }
+
     }
 
-    // You need initialize LL and node
-    public LinkedList() {
+    public DoublyLinkedList() {
         head = null; // empty list is null
         tail = null;
         nodeCount = 0; // good debugging tool
     }
 
-    // Java LL has methods why shouldn't ours
     public void add(int data) {
 
         // if there are no nodes head is now the node
-        head = new Node(data, head);
-        if (nodeCount == 0) {
+        Node newNode = new Node(data);
+        if (nodeCount == 0 && head == null && tail == null) {
+            head = newNode;
             tail = head;
-
+        } else {
+            head.prev = newNode;
+            newNode.next = head;
+            head = newNode;
         }
         nodeCount++;
 
     }
 
-    // get the value at the current index or return -1 if it doesnt exist or is out
-    // of range
     public int get(int index) {
 
-        // we have nodes or the index
+        // we don't have nodes or the index is out of range
         if (nodeCount < 1 || index >= nodeCount || index < 0) {
             return -1;
         }
 
         Node curr = head;
-        // there must be at least one item. Node 1 = index 0 so if there are 2 nodes
-        // then index = nodeCount -1
-
         for (int i = 0; i < index; i++) {
             curr = curr.next;
         }
@@ -65,14 +67,15 @@ public class LinkedList implements List {
     public void addToTail(int data) {
         Node curr = new Node(data, null);
         if (tail == null) {
+            curr.prev = null;
             tail = curr;
             head = tail;
         } else {
             tail.next = curr;
+            curr.prev = tail;
             tail = tail.next;
         }
         nodeCount++;
-
     }
 
     // remove a specific key (data) (only one)
@@ -105,6 +108,55 @@ public class LinkedList implements List {
 
     }
 
+    // remove first item
+    public void removeFromHead() {
+
+        if (!isEmpty()) {
+            if (lastNode()) {
+                reset();
+            } else {
+                head = head.next;
+                head.prev = null;
+                nodeCount--;
+            }
+        }
+    }
+
+    // remove last item
+    public void removeFromTail() {
+        if (!isEmpty()) {
+            if (lastNode()) {
+                reset();
+            } else {
+                // not the last node
+                tail = tail.prev;
+                tail.next = null;
+                nodeCount--;
+            }
+        }
+    }
+
+    public void removeFromMiddle(int key) {
+        Node curr = head;
+        while (curr != null) { // while the list isnt empty and were not at the end
+
+            // go to the node at index
+            if (curr.data == key) {
+                // prev node must connect to next
+                // next must connect to prev
+                // curr will be collected by garbage collector
+                Node prev = curr.prev;
+                Node next = curr.next;
+                prev.next = next;
+                next.prev = prev;
+                nodeCount--;
+            }
+            curr = curr.next;
+        }
+
+    }
+
+    // delete at a specific index
     public void deleteAt(int index) {
         if (index >= nodeCount || index < 0)
             return;
@@ -116,68 +168,26 @@ public class LinkedList implements List {
                 removeFromTail();
             } else {
                 Node curr = head;
-                // go to the node before the index
-                for (int i = 0; i < index - 1; i++) {
+                // go to the node at index
+                for (int i = 0; i < index; i++) {
                     curr = curr.next;
                 }
-                // another option would be to reuse the remove from middle function
-                // this just looks cleaner and we have already traversed the list (so why do it
-                // again)
-                // removeFromMiddle(curr.next.data); to test
 
-                // comment this out if trying the above comment
-                curr.next = curr.next.next;
+                // prev node must connect to next
+                // next must connect to prev
+                // curr will be collected by garbage collector
+                Node prev = curr.prev;
+                Node next = curr.next;
+                prev.next = next;
+                next.prev = prev;
                 nodeCount--;
             }
         }
 
     }
 
-    public void removeFromHead() {
-        if (!isEmpty()) {
-            if (lastNode()) {
-                reset();
-            } else {
-                head = head.next;
-                nodeCount--;
-            }
-        }
-    }
-
-    public void removeFromTail() {
-        if (!isEmpty()) {
-            if (lastNode()) {
-                reset();
-            } else {
-                // not the last node
-                Node curr = head;
-                while (curr != null && curr.next != tail) {
-                    curr = curr.next;
-                }
-                curr.next = null;
-                tail = curr;
-                nodeCount--;
-            }
-        }
-    }
-
-    public void removeFromMiddle(int key) {
-        Node curr = head;
-        Node prev = curr;
-        while (curr != null) { // while the list isnt empty and were not at the end
-
-            // delete anywhere else
-            if (curr.data == key) { // normal operation
-                curr = curr.next;
-                prev.next = curr;
-                nodeCount--;
-            }
-            prev = curr;
-            curr = curr.next;
-
-        }
-    }
-
+    // add at a specific index. Current data takes it place and shifts previous data
+    // to the next index
     public void addAt(int data, int index) {
         if (index > nodeCount)
             return;
@@ -190,12 +200,16 @@ public class LinkedList implements List {
 
         } else {
             Node curr = head;
-            // go to the node before the index
-            for (int i = 0; i < index - 1; i++) {
+            // go to the node index
+            for (int i = 0; i < index; i++) {
                 curr = curr.next;
             }
-            Node node = new Node(data, curr.next);
-            curr.next = node;
+
+            // save prev
+            Node prev = curr.prev;
+            Node node = new Node(data, curr);
+            prev.next = node;
+            node.prev = prev;
             // another option would be to reuse the remove from middle function
             // this just looks cleaner and we have already traversed the list (so why do it
             // again)
@@ -209,32 +223,19 @@ public class LinkedList implements List {
 
     }
 
-    // if it is the last node we must set head to null and tail to null and set
-    // nodeCount to 0
-    private boolean lastNode() {
-        if (head == tail && nodeCount == 1) {
-            return true;
-        }
-        return false;
-    }
-
+    // resets list to empty
     public void reset() {
         head = null;
         tail = null;
         nodeCount = 0;
     }
 
+    // returns size
     public int size() {
         return nodeCount;
     }
 
-    public boolean isEmpty() {
-        if (nodeCount == 0 && head == null && tail == null) {
-            return true;
-        }
-        return false;
-    }
-
+    // checks if an int exists in the list
     public boolean contains(int key) {
         Node curr = head;
         while (curr != null) {
@@ -263,6 +264,23 @@ public class LinkedList implements List {
         return -1;
     }
 
+    // if it is the last node we must set head to null and tail to null and set
+    // nodeCount to 0
+    private boolean lastNode() {
+        if (head == tail && nodeCount == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEmpty() {
+        if (nodeCount == 0 && head == null && tail == null) {
+            return true;
+        }
+        return false;
+    }
+
+    // prints the list (typical debugging tool but also useful)
     public void printList() {
         Node curr = head;
         System.out.println("List contains: " + nodeCount + " nodes");
@@ -277,4 +295,20 @@ public class LinkedList implements List {
         }
         System.out.println("]");
     }
+
+    public void printListReverse() {
+        Node curr = tail;
+        System.out.println("List contains: " + nodeCount + " nodes");
+        System.out.print("[");
+        while (curr != null) {
+
+            System.out.print(curr.data);
+            curr = curr.prev;
+            if (curr != null) {
+                System.out.print(",");
+            }
+        }
+        System.out.println("]");
+    }
+
 }
