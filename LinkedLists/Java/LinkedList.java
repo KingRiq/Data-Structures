@@ -48,7 +48,7 @@ public class LinkedList {
     public int get(int index) {
 
         // we have nodes or the index
-        if (nodeCount < 1 || index > nodeCount) {
+        if (nodeCount < 1 || index >= nodeCount || index < 0) {
             return -1;
         }
 
@@ -85,24 +85,28 @@ public class LinkedList {
          * removed it so we should search every time to be sure
          * it is a time saver at best
          */
-        Node curr = head;
-        if (curr == head && curr.data == key) {
 
-            // if this is the last Node just reset it.
-            // lets create a utility function that will check if we are on the last node or
-            // not because I am tired of thinking about it.
-            removeFromHead();
-            // we found it we need to stop
-        } else if (tail.data == key) {
-            removeFromTail();
-        } else {
-            removeFromMiddle(key);
+        // if the list is empty there is nothing to remove
+        Node curr = head;
+        if (!isEmpty()) {
+            if (curr != null && curr == head && curr.data == key) {
+
+                // if this is the last Node just reset it.
+                // lets create a utility function that will check if we are on the last node or
+                // not because I am tired of thinking about it.
+                removeFromHead();
+                // we found it we need to stop
+            } else if (tail.data == key) {
+                removeFromTail();
+            } else {
+                removeFromMiddle(key);
+            }
         }
 
     }
 
     public void deleteAt(int index) {
-        if (index >= nodeCount)
+        if (index >= nodeCount || index < 0)
             return;
 
         if (index == 0) {
@@ -128,27 +132,30 @@ public class LinkedList {
     }
 
     public void removeFromHead() {
-        if (lastNode()) {
-            reset();
-        } else {
-            head = head.next;
-            nodeCount--;
+        if (!isEmpty()) {
+            if (lastNode()) {
+                reset();
+            } else {
+                head = head.next;
+                nodeCount--;
+            }
         }
     }
 
     public void removeFromTail() {
-
-        if (lastNode()) {
-            reset();
-        } else {
-            // not the last node
-            Node curr = head;
-            while (curr != null && curr.next != tail) {
-                curr = curr.next;
+        if (!isEmpty()) {
+            if (lastNode()) {
+                reset();
+            } else {
+                // not the last node
+                Node curr = head;
+                while (curr != null && curr.next != tail) {
+                    curr = curr.next;
+                }
+                curr.next = null;
+                tail = curr;
+                nodeCount--;
             }
-            curr.next = null;
-            tail = curr;
-            nodeCount--;
         }
     }
 
@@ -170,13 +177,13 @@ public class LinkedList {
     }
 
     public void addAt(int data, int index) {
-        if (index >= nodeCount)
+        if (index > nodeCount)
             return;
 
         if (index == 0) {
             add(data);
 
-        } else if (index == nodeCount - 1) {
+        } else if (index == nodeCount) {
             addToTail(data);
 
         } else {
@@ -185,7 +192,7 @@ public class LinkedList {
             for (int i = 0; i < index - 1; i++) {
                 curr = curr.next;
             }
-            Node node = new Node(data, curr.next.next);
+            Node node = new Node(data, curr.next);
             curr.next = node;
             // another option would be to reuse the remove from middle function
             // this just looks cleaner and we have already traversed the list (so why do it
@@ -195,7 +202,7 @@ public class LinkedList {
             // comment this out if trying the above comment
 
             nodeCount++;
-            ;
+
         }
 
     }
@@ -224,6 +231,34 @@ public class LinkedList {
             return true;
         }
         return false;
+    }
+
+    public boolean contains(int key) {
+        Node curr = head;
+        while (curr != null) {
+            if (curr.data == key) {
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
+    }
+
+    // gets tail value or returns -1
+    public int getLast() {
+
+        if (tail != null) {
+            return tail.data;
+        }
+        return -1;
+    }
+
+    // gets head or returns -1
+    public int getFirst() {
+        if (head != null) {
+            return head.data;
+        }
+        return -1;
     }
 
     public void printList() {
