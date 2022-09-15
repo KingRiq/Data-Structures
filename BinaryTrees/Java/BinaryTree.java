@@ -55,7 +55,7 @@ public class BinaryTree {
             curr.left = delete_Node(curr.left, data);
         else if (data > curr.data) // else check right
             curr.right = delete_Node(curr.right, data);
-        else {
+        else { // it must equal this node right?
 
             // check if we are at the bottom
             if (curr.left == null && curr.right == null) {
@@ -66,7 +66,8 @@ public class BinaryTree {
             else if (curr.right == null)
                 return curr.left;
 
-            // two nodes exists lets find make the lesser our parent node
+            // two nodes exists lets find make the lesser our parent node (in the RIGHT
+            // subtree)
             else {
                 Node temp = minVal(curr.right);
                 curr.data = temp.data;
@@ -106,6 +107,11 @@ public class BinaryTree {
 
     public int getCount() {
         return nodeCount;
+    }
+
+    public void reset() {
+        root = null;
+        nodeCount = 0;
     }
 
     public void printAll_Traversals() {
