@@ -115,7 +115,7 @@ public class ListArray<T> implements ArrayDSInterface {
         size = 0;
     }
 
-    public boolean contains(T element) {
+    public boolean contains(Object element) {
         for (int i = 0; i < this.size(); i++) {
             if (array[i].equals(element)) {
                 return true;
@@ -186,6 +186,25 @@ public class ListArray<T> implements ArrayDSInterface {
             array[i + 1] = null;
         }
         size--;
+    }
+
+    // need o remove Object and contains Object so that user can remove something if
+    // it exists in the list.
+    // eh why not Ill code it really quick its the tests I hate doing atm.
+    // I realized I made a contains function where the parameter was type T but
+    // Generics can resolve down to object so this allows more flexibility. This is
+    // why I changed it
+
+    public boolean remove(Object element) {
+        if (contains(element)) {
+            for (int i = 0; i < this.size(); i++) {
+                if (array[i].equals(element)) {
+                    remove(i);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

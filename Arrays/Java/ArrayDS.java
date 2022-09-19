@@ -152,7 +152,14 @@ public class ArrayDS {
         }
         System.out.println(listed);
         System.out.println(arrayList);
+        System.out.println(arrayList.contains(1));
+        System.out.println(arrayList.remove((Object) 19));
 
+        System.out.println(arrayList1.contains(1));
+        System.out.println(arrayList1.contains("saira"));
+        System.out.println(arrayList1.remove("saira"));
+        System.out.println(arrayList1.contains("saira"));
+        System.out.println(arrayList);
     }
 
     // dependency injection
