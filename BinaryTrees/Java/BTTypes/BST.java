@@ -1,7 +1,3 @@
-package Types;
-
-import java.util.Queue;
-
 // binary search tree
 public class BST extends BinaryTree {
     public BST() {
