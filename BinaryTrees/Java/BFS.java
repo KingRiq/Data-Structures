@@ -8,6 +8,10 @@ public class BFS {
         System.out.println("]");
     }
 
+    // this algorithm does not know what level it is on it merely prints in a BFS
+    // way
+    // because the queue will remove the nodes in the correct order this is by
+    // contract of queue's structure.
     public static void print_BFS(BinaryTree.Node root) {
 
         Queue<BinaryTree.Node> queue = new LinkedList<>();

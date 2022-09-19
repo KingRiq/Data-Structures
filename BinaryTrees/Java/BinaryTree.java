@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinaryTree {
     int nodeCount;
@@ -107,6 +109,45 @@ public class BinaryTree {
 
     public int getCount() {
         return nodeCount;
+    }
+
+    public int maxHeight() {
+        // do a search to check max height
+        // this will be non-recusrive but I will create a recursive verison as well
+
+        int max = -1;
+        // BFS seems the most intuitive since we will assess the height as one entity.
+        // DFS would exam each height individually (for each path)
+        // I also need to code these two as I'm unfamiliar... I should know this.
+
+        // first create a queue
+        Queue<Node> queue = new LinkedList<>();
+        // start at root
+        Node curr = root;
+        queue.add(curr);
+
+        // so while root is not null and queue isnt empty. Both means we are done
+        // we can subtract the root level later
+        while (root != null && !queue.isEmpty()) {
+
+            // we need to process every level... this requires an inner loop.
+            // Every outer loop processes a new height
+
+            int size = queue.size();
+            while (size > 0) {
+                curr = queue.poll(); // why not use error checking this time around
+                if (curr.left != null) {
+                    queue.offer(curr.left);
+                }
+                if (curr.right != null) {
+                    queue.offer(curr.right);
+                }
+                size--;
+            }
+            max++;
+        }
+
+        return max; // root level doesnt count I've read... so root == 0 empty == -1
     }
 
     public void reset() {
