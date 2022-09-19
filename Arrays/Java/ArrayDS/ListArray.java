@@ -43,7 +43,9 @@ public class ListArray<T> implements ArrayDSInterface {
     }
 
     private void insert(int index) {
-
+        // copy from end to index where index is always less than the size and size is
+        // always less than the length
+        // upon insertion (study the code above to understand why)
         for (int i = size() - 1; i >= index; i--) {
             array[i + 1] = array[i];
         }
@@ -73,7 +75,18 @@ public class ListArray<T> implements ArrayDSInterface {
     }
 
     public String toString() {
-        return Arrays.toString(array);
+        String string = "";
+        string += "[";
+        for (int i = 0; i < size(); i++) {
+            string += array[i].toString();
+            if (i != size() - 1) {
+                string += ", ";
+            }
+        }
+        string += "]";
+        // technically wrong by documentation
+        // return Arrays.toString(array);
+        return string;
     }
 
     public T get(int index) {
@@ -98,7 +111,7 @@ public class ListArray<T> implements ArrayDSInterface {
     }
 
     public void clear() {
-        array = new Object[size];
+        array = new Object[1];
         size = 0;
     }
 
@@ -161,6 +174,8 @@ public class ListArray<T> implements ArrayDSInterface {
         }
         T temp = (T) array[index];
         shift(index);
+        // our size just shrank so the item we insert will overwrite this position
+        array[size] = null;
         return temp;
 
     }
@@ -172,4 +187,5 @@ public class ListArray<T> implements ArrayDSInterface {
         }
         size--;
     }
+
 }

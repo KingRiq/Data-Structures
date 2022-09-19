@@ -133,8 +133,29 @@ public class ArrayDS {
         arrayList.add(6, 500);
         System.out.println(arrayList);
 
+        arrayList.clear();
+        System.out.println(arrayList);
+        arrayList.add(1);
+        System.out.println(arrayList);
+        arrayList.remove(0);
+        System.out.println(arrayList);
+        arrayList.clear();
+        ArrayList<Integer> listed = new ArrayList<>();
+        System.out.println("list" + listed);
+        for (int z = 0; z < 20; z++) {
+            listed.add(z);
+            arrayList.add(z);
+        }
+        for (int z = 0; z < 5; z++) {
+            listed.remove(z);
+            arrayList.remove(z);
+        }
+        System.out.println(listed);
+        System.out.println(arrayList);
+
     }
 
+    // dependency injection
     public static int insert(Object array[], ArrayDSInterface object, int pointer) {
 
         if (object instanceof StackArray) {
