@@ -1,3 +1,5 @@
+package Type.SearchingAlgorithm;
+
 import java.util.*;
 
 public class DFSIterative {

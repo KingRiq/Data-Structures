@@ -1,13 +1,15 @@
-import java.util.LinkedList;
-import java.util.Queue;
+package Types;
+
+import java.util.*;
+import SearchingAlgorithm.*;
 
 public class BinaryTree {
     int nodeCount;
     public Node root;
 
     public class Node {
-        Node left, right;
-        int data;
+        public Node left, right;
+        public int data;
 
         Node(int data) {
             this.data = data;
@@ -159,15 +161,15 @@ public class BinaryTree {
         System.out.println("Printing All possible traversals");
 
         System.out.println("Starting PreOrder");
-        PreOrder.print(this);
+        DFS.preOrder(this);
         System.out.println("PreOrder Complete");
 
         System.out.println("Starting InOrder");
-        InOrder.print(this);
+        DFS.inOrder(this);
         System.out.println("InOrder Complete");
 
         System.out.println("Starting PostOrder");
-        PostOrder.print(this);
+        DFS.postOrder(this);
         System.out.println("Post Order Complete");
 
         System.out.println("Starting DFS Iterative InOrder");
