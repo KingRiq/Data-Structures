@@ -1,16 +1,17 @@
 //HashTable
+// using my LL implentation.
 // ill use 31 as my hash (10x+y) %31 for example
-public class HashTable1 {
-    
+public class HashSet1 {
+
     private LinkedList[] HashArray;
-    int entryNum;
+    int entryNum; // size
     final static int hash = 31;
 
-    public HashTable1(int size) {
+    public HashSet1(int size) {
         HashArray = new LinkedList[size];
         entryNum = 0;
 
-        for(int i = 0; i < HashArray.length; i++) {
+        for (int i = 0; i < HashArray.length; i++) {
             HashArray[i] = null;
         }
     }
@@ -18,64 +19,65 @@ public class HashTable1 {
     private int hash(String key) {
 
         int hashIndex = 0;
-        for(int i = 0; i < key.length(); i++) {
+        for (int i = 0; i < key.length(); i++) {
             hashIndex = ((hashIndex * hash) + key.charAt(i)) % HashArray.length;
         }
         return hashIndex;
     }
 
-    public void insert (String key) {
+    public void insert(String key) {
 
         // get the hash of the string in question
         int hashIndex = hash(key);
 
         // if the key does not exist already do stuff
-        if(!search(key)) {
-            if(HashArray[hashIndex] == null) {
+        if (!contains(key)) {
+            if (HashArray[hashIndex] == null) {
                 HashArray[hashIndex] = new LinkedList();
             }
-            //we didnt find it so enter it.
+            // we didnt find it so enter it.
             HashArray[hashIndex].add(key);
         }
     }
 
     public void remove(String key) {
         int hashIndex = hash(key);
-        if(HashArray[hashIndex] != null) {
+        if (HashArray[hashIndex] != null) {
             HashArray[hashIndex].remove(key);
         }
     }
-    public boolean search(String key) {
+
+    public boolean contains(String key) {
         int hashIndex = hash(key);
         boolean found = false;
-        if(HashArray[hashIndex] != null) {
-            found = HashArray[hashIndex].search(key);
+        if (HashArray[hashIndex] != null) {
+            found = HashArray[hashIndex].contains(key);
         }
         return found;
     }
 
-    public void  printList() {
-        for(int i = 0; i < HashArray.length; i++) {
-            
-            System.out.print("Bucket[" + i +"]: ");
-            if(HashArray[i] != null)
+    public void printList() {
+        for (int i = 0; i < HashArray.length; i++) {
+
+            System.out.print("Bucket[" + i + "]: ");
+            if (HashArray[i] != null)
                 HashArray[i].printList();
-           
+
             System.out.println();
-        
-        }  
+
+        }
     }
 
     public void reset() {
-        for(int i = 0 ; i < HashArray.length; i++) {
+        for (int i = 0; i < HashArray.length; i++) {
             HashArray[i] = null;
         }
     }
 
     public int getSize() {
         entryNum = 0;
-        for(int i = 0 ; i < HashArray.length; i++) {
-            if(HashArray[i] != null) {
+        for (int i = 0; i < HashArray.length; i++) {
+            if (HashArray[i] != null) {
                 entryNum += HashArray[i].size();
             }
         }

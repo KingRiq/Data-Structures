@@ -1,7 +1,10 @@
 //HashTable
+
+// using a node array. I prefer this way.
+// after observation this is technically a hashset... where 
 // ill use 31 as my hash (10x+y) %31 for example
-public class HashTable {
-    
+public class HashSet {
+
     private Node[] HashArray;
     int entryNum;
     final static int hash = 31;
@@ -16,21 +19,22 @@ public class HashTable {
             next = newNode;
         }
     }
-    public HashTable(int size) {
+
+    public HashSet(int size) {
         HashArray = new Node[size];
         entryNum = 0;
 
-        for(int i = 0; i < HashArray.length; i++) {
+        for (int i = 0; i < HashArray.length; i++) {
             HashArray[i] = null;
         }
     }
 
-    protected void insertNode( int hashIndex , String key) {
+    protected void insertNode(int hashIndex, String key) {
         // Create a new node
-        Node newNode = new Node(key , null);
-        
+        Node newNode = new Node(key, null);
+
         // check if initialized
-        if(HashArray[hashIndex] == null)
+        if (HashArray[hashIndex] == null)
             HashArray[hashIndex] = newNode;
         else {
             newNode.next = HashArray[hashIndex];
@@ -39,34 +43,36 @@ public class HashTable {
         entryNum++;
 
     }
+
     private int hash(String key) {
 
         int hashIndex = 0;
-        for(int i = 0; i < key.length(); i++) {
+        for (int i = 0; i < key.length(); i++) {
             hashIndex = ((hashIndex * hash) + key.charAt(i)) % HashArray.length;
         }
         return hashIndex;
     }
 
-    public void insert (String key) {
+    public void insert(String key) {
 
         // get the hash of the string in question
         int hashIndex = hash(key);
 
         // if the key does not exist already do stuff
-        if(!search(key)) {
-            
-            //we didnt find it so enter it.
+        if (!contains(key)) {
+
+            // we didnt find it so enter it.
             insertNode(hashIndex, key);
         }
 
     }
-    public boolean search(String key) {
+
+    public boolean contains(String key) {
         boolean found = false;
         int hashIndex = hash(key);
         Node curr = HashArray[hashIndex];
-        
-        while(curr != null && !found) {
+
+        while (curr != null && !found) {
             found = curr.key.equals(key);
             curr = curr.next;
         }
@@ -74,22 +80,22 @@ public class HashTable {
         return found;
     }
 
-    public void  printList() {
-        for(int i = 0; i < HashArray.length; i++) {
+    public void printList() {
+        for (int i = 0; i < HashArray.length; i++) {
             Node curr = HashArray[i];
-            System.out.print("Bucket[" + i +"]: ");
-            while(curr != null) {
+            System.out.print("Bucket[" + i + "]: ");
+            while (curr != null) {
                 System.out.print(curr.key);
 
-                if(curr.next != null) {
+                if (curr.next != null) {
                     System.out.print(", ");
                 }
                 curr = curr.next;
             }
-           
+
             System.out.println();
-        
+
         }
-        
+
     }
 }
