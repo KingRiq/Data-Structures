@@ -100,4 +100,6 @@ public class Array {
     public static void printArr(int[] arr) {
         System.out.println(Arrays.toString(arr) + "\n");
     }
+
+    //for commit on new computer
 }
